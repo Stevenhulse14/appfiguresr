@@ -1,39 +1,30 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import type { Review, TimePeriod } from "@/types/reviews";
+import { filterReviews, groupReviewsByDate } from "./helpers/reviewHelpers";
+import { fetchReviews } from "./thunks/reviewThunks";
 
-export const fetchReviews = createAsyncThunk<
-  { reviews: Review[]; total: number; pages: number },
-  { page: number; count: number }
->("reviews/fetchReviews", async ({ page, count }) => {
-  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-  if (!baseUrl) {
-    throw new Error("API base URL not configured");
-  }
-
-  const response = await fetch(
-    `${baseUrl}?page=${page}&count=${count}&sort=-date&products=56556`
-  );
-  if (!response.ok) {
-    throw new Error("Failed to fetch reviews");
-  }
-  return response.json();
-});
-
+/**
+ * Defines the shape of the review state in Redux store
+ */
 interface ReviewState {
-  reviews: Review[];
-  loading: boolean;
-  error: string | null;
-  keywordFilter: string;
-  starFilter: number;
-  selectedPeriod: TimePeriod;
-  page: number;
-  count: 25 | 50 | 100 | 500;
-  totalPages: number;
-  totalReviews: number;
-  filteredReviews: Review[];
-  groupedReviews: Record<TimePeriod, Review[]>;
+  reviews: Review[]; // All fetched reviews
+  loading: boolean; // Loading state for async operations
+  error: string | null; // Error message if any
+  keywordFilter: string; // Current keyword filter
+  starFilter: number; // Current star rating filter
+  selectedPeriod: TimePeriod; // Selected time period for grouping
+  page: number; // Current page number
+  count: 25 | 50 | 100 | 500; // Items per page
+  totalPages: number; // Total number of pages
+  totalReviews: number; // Total number of reviews
+  filteredReviews: Review[]; // Reviews after applying filters
+  groupedReviews: Record<TimePeriod, Review[]>; // Reviews grouped by time period
 }
 
+/**
+ * Initial state for the review slice
+ * Sets default values for all state properties
+ */
 const initialState: ReviewState = {
   reviews: [],
   loading: false,
@@ -58,10 +49,16 @@ const initialState: ReviewState = {
   },
 };
 
+/**
+ * Review slice containing reducers and actions for managing review state
+ */
 const reviewSlice = createSlice({
   name: "reviews",
   initialState,
   reducers: {
+    /**
+     * Updates keyword filter and recalculates filtered/grouped reviews
+     */
     setKeywordFilter: (state, action) => {
       state.keywordFilter = action.payload;
       state.page = 1;
@@ -71,6 +68,9 @@ const reviewSlice = createSlice({
       });
       state.groupedReviews = groupReviewsByDate(state.filteredReviews);
     },
+    /**
+     * Updates star rating filter and recalculates filtered/grouped reviews
+     */
     setStarFilter: (state, action) => {
       state.starFilter = action.payload;
       state.page = 1;
@@ -80,12 +80,21 @@ const reviewSlice = createSlice({
       });
       state.groupedReviews = groupReviewsByDate(state.filteredReviews);
     },
+    /**
+     * Updates the selected time period for viewing reviews
+     */
     setSelectedPeriod: (state, action) => {
       state.selectedPeriod = action.payload;
     },
+    /**
+     * Updates the current page number for pagination
+     */
     setPage: (state, action) => {
       state.page = action.payload;
     },
+    /**
+     * Updates items per page and resets to first page
+     */
     setCount: (state, action) => {
       state.count = action.payload;
       state.page = 1;
@@ -93,10 +102,17 @@ const reviewSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      /**
+       * Handle pending state of fetchReviews
+       */
       .addCase(fetchReviews.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
+      /**
+       * Handle successful fetchReviews response
+       * Updates reviews and recalculates derived state
+       */
       .addCase(fetchReviews.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
@@ -109,15 +125,21 @@ const reviewSlice = createSlice({
         state.totalReviews = action.payload.total;
         state.totalPages = Math.ceil(action.payload.total / state.count);
 
+        // If current period has no reviews, select first period with reviews
         if (state.groupedReviews[state.selectedPeriod].length === 0) {
           const firstPeriodWithReviews = Object.entries(
             state.groupedReviews
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
           ).find(([_, reviews]) => reviews.length > 0);
           if (firstPeriodWithReviews) {
             state.selectedPeriod = firstPeriodWithReviews[0] as TimePeriod;
           }
         }
       })
+      /**
+       * Handle fetchReviews error state
+       * Resets reviews and sets error message
+       */
       .addCase(fetchReviews.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "Failed to fetch reviews";
@@ -128,97 +150,10 @@ const reviewSlice = createSlice({
   },
 });
 
-// Helper function to filter reviews
-function filterReviews(
-  reviews: Review[],
-  filters: { keyword: string; stars: number }
-) {
-  let filtered = [...reviews];
+// Re-export fetchReviews thunk for component use
+export { fetchReviews };
 
-  if (filters.keyword) {
-    const searchTerm = filters.keyword.toLowerCase();
-    filtered = filtered.filter(
-      (review) =>
-        review.review.toLowerCase().includes(searchTerm) ||
-        review.title.toLowerCase().includes(searchTerm) ||
-        review.author.toLowerCase().includes(searchTerm)
-    );
-  }
-
-  if (filters.stars > 0) {
-    filtered = filtered.filter(
-      (review) => Number(review.stars) === filters.stars
-    );
-  }
-
-  return filtered;
-}
-
-// Add this helper function
-function groupReviewsByDate(reviews: Review[]) {
-  const groups = {
-    Today: [] as Review[],
-    Yesterday: [] as Review[],
-    "This Week": [] as Review[],
-    "Last Week": [] as Review[],
-    "This Month": [] as Review[],
-    "Last Month": [] as Review[],
-    "Two Months Ago": [] as Review[],
-    "Three Months Ago": [] as Review[],
-  };
-
-  const now = new Date();
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const yesterday = new Date(today);
-  yesterday.setDate(today.getDate() - 1);
-
-  const thisWeekStart = new Date(today);
-  thisWeekStart.setDate(today.getDate() - today.getDay()); // Start of current week
-
-  const lastWeekStart = new Date(thisWeekStart);
-  lastWeekStart.setDate(thisWeekStart.getDate() - 7);
-
-  const thisMonthStart = new Date(today.getFullYear(), today.getMonth(), 1);
-  const lastMonthStart = new Date(today.getFullYear(), today.getMonth() - 1, 1);
-  const twoMonthsAgoStart = new Date(
-    today.getFullYear(),
-    today.getMonth() - 2,
-    1
-  );
-  const threeMonthsAgoStart = new Date(
-    today.getFullYear(),
-    today.getMonth() - 3,
-    1
-  );
-
-  reviews.forEach((review) => {
-    const reviewDate = new Date(review.date);
-
-    if (reviewDate.toDateString() === today.toDateString()) {
-      groups["Today"].push(review);
-    } else if (reviewDate.toDateString() === yesterday.toDateString()) {
-      groups["Yesterday"].push(review);
-    } else if (reviewDate >= thisWeekStart && reviewDate < today) {
-      groups["This Week"].push(review);
-    } else if (reviewDate >= lastWeekStart && reviewDate < thisWeekStart) {
-      groups["Last Week"].push(review);
-    } else if (reviewDate >= thisMonthStart) {
-      groups["This Month"].push(review);
-    } else if (reviewDate >= lastMonthStart && reviewDate < thisMonthStart) {
-      groups["Last Month"].push(review);
-    } else if (reviewDate >= twoMonthsAgoStart && reviewDate < lastMonthStart) {
-      groups["Two Months Ago"].push(review);
-    } else if (
-      reviewDate >= threeMonthsAgoStart &&
-      reviewDate < twoMonthsAgoStart
-    ) {
-      groups["Three Months Ago"].push(review);
-    }
-  });
-
-  return groups;
-}
-
+// Export all actions
 export const {
   setKeywordFilter,
   setStarFilter,
@@ -227,4 +162,5 @@ export const {
   setCount,
 } = reviewSlice.actions;
 
+// Export the reducer
 export default reviewSlice.reducer;
