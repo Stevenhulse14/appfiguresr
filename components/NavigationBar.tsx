@@ -12,7 +12,7 @@ import Image from "next/image";
  */
 const NavigationBar = () => {
   return (
-    <nav className="bg-gradient-to-r from-gray-900 to-gray-700 p-4">
+    <nav className="bg-gradient-to-r from-gray-900 to-gray-700 p-5">
       {/* Container with responsive flex layout */}
       <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0">
         {/* Logo and branding section */}
@@ -24,41 +24,41 @@ const NavigationBar = () => {
           <Image
             src="/images/logos/appfigures-logo-full.svg"
             alt="Appfigures Logo"
-            width={100}
-            height={20}
-            className="h-4 sm:h-5"
+            width={120}
+            height={24}
+            className="h-5 sm:h-6"
             priority // Ensures early loading of logo
           />
           {/* "Reviews" subtitle with positioning */}
-          <span className="absolute -bottom-3 right-0 text-[10px] text-blue-500 translate-x-4 sm:translate-x-6">
+          <span className="absolute -bottom-3 right-0 text-xs text-blue-500 translate-x-4 sm:translate-x-6">
             Reviews
           </span>
         </Link>
 
         {/* Navigation links section */}
-        <div className="flex flex-wrap justify-center gap-4 sm:space-x-6">
+        <div className="flex flex-wrap justify-center gap-5 sm:space-x-8">
           {/* Home link */}
-          <Link href="/" className="text-primary hover:text-gray-300 text-sm">
+          <Link href="/" className="text-primary hover:text-gray-300 text-base">
             Home
           </Link>
           {/* Reviews link */}
           <Link
             href="/reviews"
-            className="text-primary hover:text-gray-300 text-sm"
+            className="text-primary hover:text-gray-300 text-base"
           >
             Reviews
           </Link>
           {/* Analytics link */}
           <Link
             href="/analytics"
-            className="text-primary hover:text-gray-300 text-sm"
+            className="text-primary hover:text-gray-300 text-base"
           >
             Analytics
           </Link>
           {/* About link */}
           <Link
             href="/about"
-            className="text-primary hover:text-gray-300 text-sm"
+            className="text-primary hover:text-gray-300 text-base"
           >
             About
           </Link>
