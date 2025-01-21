@@ -21,7 +21,7 @@ export default function About() {
               <div className="aspect-video">
                 <iframe
                   className="absolute inset-0 w-full h-full rounded-lg"
-                  src="https://youtu.be/kp8C-1XOF-Y"
+                  src="https://www.youtube.com/embed/kp8C-1XOF-Y"
                   title="AppFigures Review Tutorial"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
