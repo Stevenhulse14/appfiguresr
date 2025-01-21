@@ -2,6 +2,12 @@ import "./globals.css";
 import NavigationBar from "@/components/NavigationBar";
 import { Providers } from "./providers";
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+};
+
 export const metadata = {
   title: "Appfigures Reviews",
   description: "view and analyze app reviews",
