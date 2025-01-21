@@ -1,3 +1,11 @@
+# Appfigures Reviews
+
+## Appfigures Reviews Product Demo
+
+[![Watch the Demo](https://img.youtube.com/vi/kp8C-1XOF-Y/maxresdefault.jpg)](https://youtu.be/kp8C-1XOF-Y)
+
+Click the image above to watch the demo video on YouTube.
+
 # Appfigures Reviews Explorer
 
 A modern web application built with Next.js, TypeScript, and React for exploring and analyzing user reviews of the Twitter iOS app. This project provides an intuitive interface to explore, analyze, and understand user feedback from the App Store through the Appfigures API.

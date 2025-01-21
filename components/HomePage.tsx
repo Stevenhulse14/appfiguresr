@@ -10,7 +10,7 @@ const HomePage = () => {
   return (
     <div>
       <main className="container mx-auto px-4 py-8">
-        <ThreeDTitle />
+        <ThreeDTitle>Welcome to Appfigures Reviews</ThreeDTitle>
         <p className="text-lg text-gray-700 mb-8 text-center max-w-2xl mx-auto">
           Explore and analyze user reviews for the Twitter iOS app with our
           powerful and intuitive interface.

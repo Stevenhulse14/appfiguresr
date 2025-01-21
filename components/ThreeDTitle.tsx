@@ -1,6 +1,10 @@
 "use client";
 
-export default function ThreeDTitle() {
+interface ThreeDTitleProps {
+  children: React.ReactNode;
+}
+
+export default function ThreeDTitle({ children }: ThreeDTitleProps) {
   return (
     <div className="mb-6">
       <h1
@@ -20,7 +24,7 @@ export default function ThreeDTitle() {
         after:transition-all after:duration-300
       "
       >
-        Welcome to Appfigures Reviews
+        {children}
       </h1>
     </div>
   );
