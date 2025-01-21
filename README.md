@@ -1,36 +1,143 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Appfigures Reviews Explorer
+
+A modern web application built with Next.js, TypeScript, and React for exploring and analyzing user reviews of the Twitter iOS app. This project provides an intuitive interface to explore, analyze, and understand user feedback from the App Store through the Appfigures API.
+
+## Project Overview
+
+### Key Features
+
+#### Review Management
+
+- **Real-time Review Display**: Browse through the latest Twitter app reviews with a clean, responsive interface
+- **Metadata Display**: Comprehensive app information and metadata from the Appfigures API
+- **Dynamic Totals**: Real-time count of reviews based on active filters
+- **Date-Based Grouping**: Intelligent organization of reviews into categories:
+  - Today
+  - Yesterday
+  - This Week
+  - Last Week
+  - This Month
+
+#### User Interface
+
+- **Advanced Filtering**: Filter by keyword, star rating, and date
+- **Responsive Design**: Fully responsive layout across all devices
+- **Loading States**: Elegant loading skeletons for smooth user experience
+- **Modern UI**: Clean interface with subtle animations and transitions
+- **3D Title Effects**: Interactive animated title component
+
+#### Technical Features
+
+- **Pagination**: Initial load of 25 reviews with "Load more" functionality
+- **Error Handling**: Graceful error boundaries and user feedback
+- **Dynamic Updates**: Real-time filter updates without page reload
+
+## Tech Stack
+
+- **Framework**: Next.js 14 with App Router
+- **Language**: TypeScript for type safety
+- **Styling**: Tailwind CSS for responsive design
+- **State Management**: React Hooks for local state
+- **Data Fetching**: Server-side data fetching with Next.js
+- **Animations**: Custom animations and transitions
+
+## Project Structure
+
+```bash
+├── app/                    # Next.js app directory
+│   ├── page.tsx           # Home page
+│   └── reviews/           # Reviews page
+├── components/
+│   ├── ReviewList.tsx     # List of reviews
+│   ├── ReviewItem.tsx     # Single review component
+│   ├── FilterOptions.tsx  # Filter controls
+│   ├── ThreeDTitle.tsx    # 3D animated title
+│   └── ErrorBoundary.tsx  # Error handling
+├── lib/
+│   └── api.ts            # API interaction logic
+├── utils/
+│   ├── formatDate.ts     # Date formatting helpers
+│   └── filterReviews.ts  # Review filtering logic
+└── styles/               # Global styles
+```
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository:
+
+```bash
+git clone https://github.com/yourusername/appfigures-reviews.git
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Set up environment variables:
+   Create a `.env.local` file with:
+
+```env
+NEXT_PUBLIC_API_BASE_URL=https://appfigures.com/{missing}/jobs/twitter-reviews
+NEXT_PUBLIC_API_URL=http://localhost:3000
+```
+
+4. Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Core Features Implementation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Review Display
 
-## Learn More
+- Comprehensive review information including:
+  - Star rating
+  - Review title and body
+  - Author information
+  - Submission date
+  - Version information
 
-To learn more about Next.js, take a look at the following resources:
+### Filtering System
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Keyword-based search
+- Star rating filters
+- Date range selection
+- Real-time filter updates
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Loading States
 
-## Deploy on Vercel
+- Skeleton loading for reviews
+- Smooth transitions between states
+- Placeholder content during data fetch
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Future Enhancements
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [ ] Advanced sentiment analysis
+- [ ] Export functionality
+- [ ] User authentication
+- [ ] Detailed analytics dashboard
+- [ ] Review response tracking
+- [ ] Comparative analysis features
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+- Data provided by AppFigures API
+- Built with modern web technologies
+- Inspired by contemporary analytics dashboards
