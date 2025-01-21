@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.0",
+    "@splinetool/react-spline": "^4.0.0",
+    "@splinetool/runtime": "^1.9.59",
     "@types/tailwindcss": "^3.0.11",
     "lucide-react": "^0.473.0",
     "next": "^15.1.5",

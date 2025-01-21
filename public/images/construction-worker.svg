@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 64">
+  <!-- Hammer on the right (flipped) -->
+  <g transform="translate(70, 20)">
+    <!-- Hammer handle with wood grain effect -->
+    <defs>
+      <linearGradient id="woodGrain" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" style="stop-color:#8B4513"/>
+        <stop offset="50%" style="stop-color:#A0522D"/>
+        <stop offset="100%" style="stop-color:#8B4513"/>
+      </linearGradient>
+      <!-- Metal gradient for tools -->
+      <linearGradient id="metalGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:#A0A0A0"/>
+        <stop offset="50%" style="stop-color:#808080"/>
+        <stop offset="100%" style="stop-color:#606060"/>
+      </linearGradient>
+      <!-- Hard hat gradient -->
+      <linearGradient id="hatGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:#FFE55C"/>
+        <stop offset="100%" style="stop-color:#FFB700"/>
+      </linearGradient>
+      <!-- Vest gradient -->
+      <linearGradient id="vestGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:#FFA500"/>
+        <stop offset="100%" style="stop-color:#FF8C00"/>
+      </linearGradient>
+    </defs>
+    
+    <!-- Handle (flipped) -->
+    <rect x="2" y="8" width="20" height="6" fill="url(#woodGrain)" transform="rotate(45, 12, 11)" rx="1"/>
+    <!-- Hammer head (flipped) -->
+    <rect x="16" y="4" width="8" height="14" fill="url(#metalGradient)" transform="rotate(45, 20, 11)"/>
+    <!-- Metal shine effect (flipped) -->
+    <rect x="16" y="4" width="8" height="2" fill="#D0D0D0" transform="rotate(45, 20, 11)" opacity="0.5"/>
+  </g>
+
+  <!-- Construction Worker (centered) -->
+  <g transform="translate(18, 0)">
+    <!-- Face with better details - moved down further -->
+    <circle cx="32" cy="26" r="8" fill="#FFA07A"/>
+    <circle cx="30" cy="25" r="1" fill="#4B4B4B"/>
+    <circle cx="34" cy="25" r="1" fill="#4B4B4B"/>
+    <path d="M30,28 Q32,29 34,28" stroke="#4B4B4B" fill="none"/>
+    
+    <!-- Enhanced Hard Hat - stays in same position -->
+    <!-- Main hat shape -->
+    <path d="M20,22 
+             C20,14 25,8 32,8 
+             C39,8 44,14 44,22" 
+          fill="url(#hatGradient)"/>
+    <!-- Hat top curve -->
+    <path d="M24,12 
+             C28,6 36,6 40,12" 
+          fill="#FFE55C"/>
+    <!-- Hat brim -->
+    <path d="M18,22 
+             C18,22 22,23 32,23 
+             C42,23 46,22 46,22" 
+          fill="#FFD700"
+          stroke="#DDB700"
+          stroke-width="0.5"/>
+    <!-- Hat shine -->
+    <path d="M24,12 
+             C28,10 36,10 40,12" 
+          fill="#FFFFFF" 
+          opacity="0.3"/>
+    <!-- Hat band -->
+    <path d="M20,20 L44,20" 
+          stroke="#DDB700" 
+          stroke-width="1"/>
+    
+    <!-- Safety helmet band with reflection - moved up -->
+    <rect x="30" y="4" width="4" height="4" fill="#FF0000"/>
+    <rect x="30" y="4" width="4" height="1" fill="#FF6666"/>
+
+    <!-- High-vis vest with details -->
+    <rect x="20" y="36" width="24" height="20" fill="url(#vestGradient)" rx="2"/>
+    <!-- Reflective stripes -->
+    <rect x="22" y="38" width="20" height="2" fill="#FFB366" opacity="0.8"/>
+    <rect x="22" y="42" width="20" height="2" fill="#FFB366" opacity="0.8"/>
+    <!-- Vest pocket -->
+    <rect x="22" y="46" width="6" height="8" fill="#FF7F00" rx="1"/>
+    
+    <!-- Arms -->
+    <rect x="18" y="36" width="4" height="16" fill="#FFA07A" rx="2"/>
+    <rect x="42" y="36" width="4" height="16" fill="#FFA07A" rx="2"/>
+  </g>
+
+  <!-- Wrench on the left (flipped) -->
+  <g transform="translate(0, 20)">
+    <!-- Wrench body (flipped) -->
+    <path d="M28,11 L12,11 A6,6 0 0,1 12,23 L28,23 A6,6 0 0,1 28,11" fill="url(#metalGradient)"/>
+    <!-- Wrench head (flipped) -->
+    <circle cx="10" cy="17" r="6" fill="url(#metalGradient)"/>
+    <!-- Detail lines (flipped) -->
+    <path d="M27,13 L13,13" stroke="#D0D0D0" stroke-width="0.5" fill="none"/>
+    <path d="M27,21 L13,21" stroke="#404040" stroke-width="0.5" fill="none"/>
+    <!-- Inner circle (flipped) -->
+    <circle cx="10" cy="17" r="4" fill="#909090"/>
+    <!-- Shine effects (flipped) -->
+    <circle cx="10" cy="15" r="1" fill="#FFFFFF" opacity="0.6"/>
+  </g>
+</svg> 

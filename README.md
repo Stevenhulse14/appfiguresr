@@ -37,7 +37,7 @@ A modern web application built with Next.js, TypeScript, and React for exploring
 - **Framework**: Next.js 14 with App Router
 - **Language**: TypeScript for type safety
 - **Styling**: Tailwind CSS for responsive design
-- **State Management**: React Hooks for local state
+- **State Management**: React Hooks for local state Redux for global state
 - **Data Fetching**: Server-side data fetching with Next.js
 - **Animations**: Custom animations and transitions
 
@@ -131,10 +131,6 @@ npm run dev
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
 
