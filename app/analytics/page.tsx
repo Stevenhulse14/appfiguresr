@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Analytics() {
   return (
@@ -45,8 +46,8 @@ export default function Analytics() {
           {/* Content section */}
           <div className="space-y-6 max-w-2xl">
             <p className="text-xl text-gray-700 leading-relaxed animate-fade-in">
-              We're building something amazing! Our analytics dashboard is under
-              construction.
+              We&apos;re building something amazing! Our analytics dashboard is
+              under construction.
             </p>
             <div className="bg-white/50 p-6 rounded-lg shadow-inner">
               <p className="text-lg font-semibold text-gray-800 mb-4">
@@ -67,12 +68,12 @@ export default function Analytics() {
           </div>
 
           {/* Return Home button */}
-          <a
+          <Link
             href="/"
             className="mt-4 px-8 py-3 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-full font-semibold shadow-lg transform hover:-translate-y-0.5 hover:shadow-xl transition-all duration-200"
           >
             ← Return Home
-          </a>
+          </Link>
         </div>
 
         {/* Decorative blobs */}
